@@ -11,7 +11,7 @@ from .resnet import ResNet50
 def create_model(model_name):
     model_dict = {
         'vgg': VGG11,
-        'resnet': ResNet50
+        'resnet': ResNet32
     }
 
     _model = model_dict[model_name]()

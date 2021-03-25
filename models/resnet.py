@@ -79,10 +79,10 @@ class ResNet(nn.Module):
         return x
 
 
-def ResNet50():
+def ResNet32():
     cfg = {
         'in_C': 32,
-        'C': [32, 64, 128, 256],
-        'num_blocks': [3, 4, 6, 3]
+        'C': [32, 32, 64, 128],
+        'num_blocks': [2, 3, 3, 2]
     }
     return ResNet(cfg)
