@@ -20,9 +20,12 @@ class VGG(nn.Module):
     def __init__(self, cfg, num_classes=10):
         super(VGG, self).__init__()
         self.features = self._make_layer(cfg)
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        self.classifier = nn.Linear(self.in_C, num_classes)
-    
+        self.classifier = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
+            nn.Flatten(),
+            nn.Linear(self.in_C, num_classes)
+        )
+        
     def _make_layer(self, cfg):
         layers = []
         self.in_C = 3
@@ -37,8 +40,6 @@ class VGG(nn.Module):
     
     def forward(self, x):
         x = self.features(x)
-        x = self.avg_pool(x)
-        x = x.view((-1, self.in_C))
         x = self.classifier(x)
         return x
 

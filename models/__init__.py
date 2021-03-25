@@ -7,12 +7,14 @@ import torchsummary
 from .vgg import *
 from .resnet import *
 from .densenet import *
+from .dpn import *
 
 def create_model(model_name):
     model_dict = {
         'vgg': VGG11,
         'resnet': ResNet32,
-        'densenet': DenseNet45
+        'densenet': DenseNet45,
+        'dpn': DPN26
     }
 
     _model = model_dict[model_name]()
