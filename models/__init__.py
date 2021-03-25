@@ -5,7 +5,7 @@ import torch
 import torchsummary
 
 from .vgg import *
-from .resnet import ResNet50
+from .resnet import *
 
 
 def create_model(model_name):
