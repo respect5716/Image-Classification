@@ -5,11 +5,13 @@ import torch
 import torchsummary
 
 from .vgg import *
+from .resnet import ResNet50
 
 
 def create_model(model_name):
     model_dict = {
         'vgg': VGG11,
+        'resnet': ResNet50
     }
 
     _model = model_dict[model_name]()
@@ -72,6 +74,9 @@ class Model(object):
     
 
     def fit(self, train_loader, val_loader, epoch_size):
+        print("=" * 50)
+        print(f"Train started!! (device: {self.device})")
+
         for ep in range(epoch_size):
             ep_start = time.time()
             train_loss, train_acc = self.run_epoch(train_loader, 'train')
@@ -86,7 +91,9 @@ class Model(object):
             self.scheduler.step()
             wandb.log({"epoch":ep, "train_loss":train_loss, "train_acc":train_acc, "val_loss":val_loss, "val_acc":val_acc, "best_epoch":self.best_epoch, "best_score":self.best_score})
             print(f"EP {ep:03d} | Train Loss {train_loss:.3f} | Train Acc {train_acc:.3f} | Val Loss {val_loss:.3f} | Val Acc {val_acc:.3f} | Time {ep_time:.0f}s")
-    
+
+        print(f"Train Finished!!")
+        print("=" * 50)
 
     def evaluate(self, test_loader):
         ep_start = time.time()

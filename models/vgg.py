@@ -1,3 +1,9 @@
+"""
+VGG (with Batch normalization)
+Karen Simonyan, Very Deep Convolutional Networks for Large-Scale Image Recognition
+https://arxiv.org/abs/1409.1556v6
+"""
+
 import torch.nn as nn
 
 class Block(nn.Module):
@@ -11,11 +17,11 @@ class Block(nn.Module):
         return self.relu(self.bn(self.conv(x)))
 
 class VGG(nn.Module):
-    def __init__(self, cfg):
+    def __init__(self, cfg, num_classes=10):
         super(VGG, self).__init__()
         self.features = self._make_layer(cfg)
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        self.classifier = nn.Linear(self.in_C, 10)
+        self.classifier = nn.Linear(self.in_C, num_classes)
     
     def _make_layer(self, cfg):
         layers = []
@@ -35,6 +41,7 @@ class VGG(nn.Module):
         x = x.view((-1, self.in_C))
         x = self.classifier(x)
         return x
+
 
 def VGG11():
     cfg = [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M']

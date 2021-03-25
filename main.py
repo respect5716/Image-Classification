@@ -28,26 +28,33 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 torch.cuda.manual_seed(SEED)
 
-def prepare():
+wandb.init(
+    config = CONFIG,
+    project = CONFIG['project']
+)
+
+def main():
     train_loader, val_loader, test_loader = create_dataloader(CONFIG['batch_size'])
+    
     _model = create_model(CONFIG['model'])
-    optimizer = optimizer = torch.optim.SGD(_model.parameters(), lr=CONFIG['lr'], momentum=CONFIG['momentum'], weight_decay=CONFIG['weight_decay'])
+    optimizer = optimizer = torch.optim.SGD(_model.parameters(), lr=CONFIG['lr'], 
+        momentum=CONFIG['momentum'], weight_decay=CONFIG['weight_decay'])
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
     criterion = nn.CrossEntropyLoss()
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    
     model = Model(_model, optimizer, scheduler, criterion, device)
     model.summary()
-    return model, train_loader, val_loader, test_loader
-
-
-def main():
-    model, train_loader, val_loader, test_loader = prepare()
+    
     model.fit(
         train_loader,
         val_loader,
         epoch_size = CONFIG['epoch_size']
     )
+    
     model.evaluate(test_loader)
+
+
 
 if __name__ == '__main__':
     main()
