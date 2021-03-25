@@ -11,7 +11,7 @@ from models import create_model, Model
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='vgg')
+parser.add_argument('--model', type=str, default='densenet')
 parser.add_argument('--project', type=str, default='cifar10')
 parser.add_argument('--optimizer', type=str, default='sgd')
 parser.add_argument('--lr', type=float, default=0.1)
