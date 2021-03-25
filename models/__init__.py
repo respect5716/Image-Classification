@@ -74,7 +74,7 @@ class Model(object):
     
 
     def fit(self, train_loader, val_loader, epoch_size):
-        print("=" * 50)
+        print("=" * 65)
         print(f"Train started!! (device: {self.device})")
 
         for ep in range(epoch_size):
@@ -93,7 +93,7 @@ class Model(object):
             print(f"EP {ep:03d} | Train Loss {train_loss:.3f} | Train Acc {train_acc:.3f} | Val Loss {val_loss:.3f} | Val Acc {val_acc:.3f} | Time {ep_time:.0f}s")
 
         print(f"Train Finished!!")
-        print("=" * 50)
+        print("=" * 65)
 
     def evaluate(self, test_loader):
         ep_start = time.time()
@@ -106,4 +106,4 @@ class Model(object):
     
     
     def summary(self):
-        print(torchsummary.summary(self._model, input_size=(3, 32, 32)))
+        print(torchsummary.summary(self._model, input_size=(3, 32, 32), device=self.device))
