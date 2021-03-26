@@ -11,6 +11,7 @@ from .dpn import *
 from .preact_resnet import *
 from .resnext import *
 from .senet import *
+from .mobilenet import *
 
 def create_model(model_name):
     model_dict = {
@@ -20,7 +21,8 @@ def create_model(model_name):
         'dpn': DPN26,
         'preact_resnet': PreactResNet32,
         'resnext': ResNeXt32_4x32d,
-        'senet': SENet32
+        'senet': SENet32,
+        'mobilenet': MobileNet22,
     }
 
     _model = model_dict[model_name]()

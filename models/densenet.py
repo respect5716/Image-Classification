@@ -1,5 +1,5 @@
 """
-DenseNet in tensorflow 2
+DenseNet
 Gao Huang, Densely Connected Convolutional Networks
 https://arxiv.org/abs/1608.06993
 """
