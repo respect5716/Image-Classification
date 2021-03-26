@@ -9,7 +9,7 @@ from .resnet import *
 from .densenet import *
 from .dpn import *
 from .preact_resnet import *
-
+from .resnext import *
 
 def create_model(model_name):
     model_dict = {
@@ -17,7 +17,8 @@ def create_model(model_name):
         'resnet': ResNet32,
         'densenet': DenseNet45,
         'dpn': DPN26,
-        'preact_resnet': PreactResNet32
+        'preact_resnet': PreactResNet32,
+        'resnext': ResNeXt32_4x32d
     }
 
     _model = model_dict[model_name]()
