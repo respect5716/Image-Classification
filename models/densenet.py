@@ -22,10 +22,10 @@ class Bottleneck(nn.Module):
         self.conv2 = nn.Conv2d(C, growth_rate, kernel_size=3, stride=1, padding=1, bias=False)
 
     def forward(self, x):
-        res = x
+        shortcut = x
         x = self.conv1(self.relu1(self.bn1(x)))
         x = self.conv2(self.relu2(self.bn2(x)))
-        x = torch.cat([x, res], dim=1)
+        x = torch.cat([x, shortcut], dim=1)
         return x
 
 

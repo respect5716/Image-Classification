@@ -30,11 +30,11 @@ class Bottleneck(nn.Module):
 
     def forward(self, x):
         out = self.relu1(self.bn1(x))
-        res = self.shortcut(out) if hasattr(self, 'shortcut') else x
+        shortcut = self.shortcut(out) if hasattr(self, 'shortcut') else x
         out = self.conv1(out)
         out = self.conv2(self.relu2(self.bn2(out)))
         out = self.conv3(self.relu3(self.bn3(out)))
-        out += res
+        out += shortcut
         return out
 
     

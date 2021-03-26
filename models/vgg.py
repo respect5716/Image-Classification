@@ -9,7 +9,7 @@ import torch.nn as nn
 class Block(nn.Module):
     def __init__(self, in_C, out_C):
         super(Block, self).__init__()
-        self.conv = nn.Conv2d(in_C, out_C, kernel_size=3, stride=1, padding=1)
+        self.conv = nn.Conv2d(in_C, out_C, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn = nn.BatchNorm2d(out_C)
         self.relu = nn.ReLU(inplace=True)
     

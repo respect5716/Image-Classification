@@ -33,11 +33,11 @@ class Bottleneck(nn.Module):
         self.relu3 = nn.ReLU()
     
     def forward(self, x):
-        res = self.shortcut(x)
+        shortcut= self.shortcut(x)
         x = self.relu1(self.bn1(self.conv1(x)))
         x = self.relu2(self.bn2(self.conv2(x)))
         x = self.bn3(self.conv3(x))
-        x += res
+        x += shortcut
         x = self.relu3(x)
         return x
 
