@@ -10,6 +10,7 @@ from .densenet import *
 from .dpn import *
 from .preact_resnet import *
 from .resnext import *
+from .senet import *
 
 def create_model(model_name):
     model_dict = {
@@ -18,7 +19,8 @@ def create_model(model_name):
         'densenet': DenseNet45,
         'dpn': DPN26,
         'preact_resnet': PreactResNet32,
-        'resnext': ResNeXt32_4x32d
+        'resnext': ResNeXt32_4x32d,
+        'senet': SENet32
     }
 
     _model = model_dict[model_name]()
