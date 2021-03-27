@@ -12,6 +12,7 @@ from .preact_resnet import *
 from .resnext import *
 from .senet import *
 from .mobilenet import *
+from .shufflenet import *
 
 def create_model(model_name):
     model_dict = {
@@ -23,6 +24,7 @@ def create_model(model_name):
         'resnext': ResNeXt32_4x32d,
         'senet': SENet32,
         'mobilenet': MobileNet22,
+        'shufflenet': ShuffleNet32,
     }
 
     _model = model_dict[model_name]()
