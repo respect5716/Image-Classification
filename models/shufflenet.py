@@ -94,10 +94,10 @@ class ShuffleNet(nn.Module):
         x = self.classifier(x)
         return x
 
-def ShuffleNet32():
+def ShuffleNet50():
     cfg = {
         'groups': 2,
-        'in_C': 24,
+        'in_C': 64,
         'out_C': [200, 400, 800],
         'num_blocks': [4, 8, 4]
     }

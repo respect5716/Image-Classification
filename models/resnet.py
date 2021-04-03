@@ -45,7 +45,7 @@ class Bottleneck(nn.Module):
 class ResNet(nn.Module):
     def __init__(self, cfg, num_classes=10):
         super(ResNet, self).__init__()
-        self.in_C = cfg['in_C']
+        self.in_C = cfg['C'][0]
         self.head = nn.Sequential(
             nn.Conv2d(3, self.in_C, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(self.in_C),
@@ -80,11 +80,9 @@ class ResNet(nn.Module):
         x = self.classifier(x)
         return x
 
-
-def ResNet32():
+def ResNet50():
     cfg = {
-        'in_C': 32,
-        'C': [32, 32, 64, 128],
-        'num_blocks': [2, 3, 3, 2]
+        'C': [32, 64, 128, 256],
+        'num_blocks': [3, 4, 6, 3]
     }
     return ResNet(cfg)

@@ -7,6 +7,7 @@ https://arxiv.org/abs/1707.01629
 import torch
 import torch.nn as nn
 
+
 class Bottleneck(nn.Module):
     def __init__(self, in_C, C, residual_C, dense_C, stride, is_first):
         super(Bottleneck, self).__init__()
@@ -23,7 +24,7 @@ class Bottleneck(nn.Module):
         self.bn1 = nn.BatchNorm2d(C)
         self.relu1 = nn.ReLU()
 
-        self.conv2 = nn.Conv2d(C, C, kernel_size=3, stride=stride, padding=1, groups=16, bias=False)
+        self.conv2 = nn.Conv2d(C, C, kernel_size=3, stride=stride, padding=1, groups=24, bias=False)
         self.bn2 = nn.BatchNorm2d(C)
         self.relu2 = nn.ReLU()
 
@@ -51,9 +52,9 @@ class DPN(nn.Module):
         )
 
         self.layer1 = self._make_layer(cfg['C'][0], cfg['residual_C'][0], cfg['dense_C'][0], cfg['num_blocks'][0], 1)
-        self.layer2 = self._make_layer(cfg['C'][1], cfg['residual_C'][1], cfg['dense_C'][1], cfg['num_blocks'][1], 1)
-        self.layer3 = self._make_layer(cfg['C'][2], cfg['residual_C'][2], cfg['dense_C'][2], cfg['num_blocks'][2], 1)
-        self.layer4 = self._make_layer(cfg['C'][3], cfg['residual_C'][3], cfg['dense_C'][3], cfg['num_blocks'][3], 1)
+        self.layer2 = self._make_layer(cfg['C'][1], cfg['residual_C'][1], cfg['dense_C'][1], cfg['num_blocks'][1], 2)
+        self.layer3 = self._make_layer(cfg['C'][2], cfg['residual_C'][2], cfg['dense_C'][2], cfg['num_blocks'][2], 2)
+        self.layer4 = self._make_layer(cfg['C'][3], cfg['residual_C'][3], cfg['dense_C'][3], cfg['num_blocks'][3], 2)
 
         self.classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
@@ -81,10 +82,10 @@ class DPN(nn.Module):
 
 def DPN26():
     cfg = {
-        'in_C': 32,
-        'C': [32, 64, 128, 256],
-        'residual_C': [48, 96, 192, 384],
-        'dense_C': [12, 24, 24, 36],
+        'in_C': 64,
+        'C': [48, 96, 192, 384],
+        'residual_C': [64, 128, 256, 512],
+        'dense_C': [16, 32, 64, 128],
         'num_blocks': [2, 2, 2, 2]
     }
     return DPN(cfg)

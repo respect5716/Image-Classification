@@ -6,7 +6,6 @@ https://arxiv.org/abs/1608.06993
 import torch
 import torch.nn as nn
 
-
 class Bottleneck(nn.Module):
     expansion = 4
 
@@ -88,9 +87,9 @@ class DenseNet(nn.Module):
         return x
 
 
-def DenseNet45():
+def DenseNet121():
     cfg = {
         'growth_rate': 12,
-        'num_blocks': [4, 6, 6, 4]
+        'num_blocks': [6, 12, 24, 16]
     }
     return DenseNet(cfg)

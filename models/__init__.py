@@ -17,13 +17,13 @@ from .shufflenet import *
 def create_model(model_name):
     model_dict = {
         'vgg': VGG11,
-        'resnet': ResNet32,
-        'densenet': DenseNet45,
+        'resnet': ResNet50,
+        'densenet': DenseNet121,
         'dpn': DPN26,
-        'preact_resnet': PreactResNet32,
-        'resnext': ResNeXt32_4x32d,
+        'preact_resnet': PreactResNet50,
+        'resnext': ResNeXt50_2x32d,
         'senet': SENet32,
-        'mobilenet': MobileNet22,
+        'mobilenet': MobileNet30,
         'shufflenet': ShuffleNet32,
     }
 

@@ -61,9 +61,9 @@ class MobileNet(nn.Module):
         return x
 
 
-def MobileNet22():
+def MobileNet30():
     cfg = {
-        'C': [32, 32, 64, 128],
-        'num_blocks': [2, 3, 3, 2]
+        'C': [64, 128, 256, 512],
+        'num_blocks': [3, 4, 4, 3]
     }
     return MobileNet(cfg)

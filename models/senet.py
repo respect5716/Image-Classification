@@ -6,6 +6,7 @@ https://arxiv.org/abs/1709.01507
 
 import torch.nn as nn
 
+
 class Bottleneck(nn.Module):
     expansion = 4
 
@@ -63,7 +64,7 @@ class Bottleneck(nn.Module):
 class SENet(nn.Module):
     def __init__(self, cfg, num_classes=10):
         super(SENet, self).__init__()
-        self.in_C = cfg['in_C']
+        self.in_C = cfg['C'][0]
         self.head = nn.Sequential(
             nn.Conv2d(3, self.in_C, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(self.in_C),
@@ -101,8 +102,7 @@ class SENet(nn.Module):
 
 def SENet32():
     cfg = {
-        'in_C': 32,
-        'C': [32, 32, 64, 128],
+        'C': [32, 64, 128, 256],
         'num_blocks': [2, 3, 3, 2]
     }
     return SENet(cfg)

@@ -43,7 +43,6 @@ class VGG(nn.Module):
         x = self.classifier(x)
         return x
 
-
 def VGG11():
     cfg = [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M']
     return VGG(cfg)

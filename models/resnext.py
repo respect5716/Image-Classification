@@ -6,6 +6,7 @@ https://arxiv.org/abs/1611.05431
 
 import torch.nn as nn
 
+
 class Bottleneck(nn.Module):
     expansion = 2
     
@@ -16,7 +17,7 @@ class Bottleneck(nn.Module):
 
         self.shortcut = nn.Sequential()
         if stride > 1 or in_C != out_C:
-            self.shourtcut = nn.Sequential(
+            self.shortcut = nn.Sequential(
                 nn.Conv2d(in_C, out_C, kernel_size=1, stride=stride, bias=False),
                 nn.BatchNorm2d(out_C)
             )
@@ -25,7 +26,7 @@ class Bottleneck(nn.Module):
         self.bn1 = nn.BatchNorm2d(bn_C)
         self.relu1 = nn.ReLU()
 
-        self.conv2 = nn.Conv2d(bn_C, bn_C, kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv2 = nn.Conv2d(bn_C, bn_C, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(bn_C)
         self.relu2 = nn.ReLU()
 
@@ -41,7 +42,7 @@ class Bottleneck(nn.Module):
         x += shortcut
         x = self.relu3(x)
         return x
-    
+
 
 class ResNeXt(nn.Module):
     def __init__(self, cfg, num_classes=10):
@@ -85,11 +86,12 @@ class ResNeXt(nn.Module):
         x = self.classifier(x)
         return x
 
-def ResNeXt32_4x32d():
+
+def ResNeXt50_2x32d():
     cfg = {
         'in_C': 32,
-        'groups': 4,
+        'groups': 2,
         'bottleneck_width': 32,
-        'num_blocks': [2, 3, 3, 2]
+        'num_blocks': [3, 4, 6, 3]
     }
     return ResNeXt(cfg)

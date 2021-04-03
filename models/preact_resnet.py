@@ -7,6 +7,7 @@ https://arxiv.org/abs/1603.05027
 import torch.nn as nn
 
 
+
 class Bottleneck(nn.Module):
     expansion = 4
 
@@ -41,7 +42,7 @@ class Bottleneck(nn.Module):
 class PreactResNet(nn.Module):
     def __init__(self, cfg, num_classes=10):
         super(PreactResNet, self).__init__()
-        self.in_C = cfg['in_C']
+        self.in_C = cfg['C'][0]
         self.head = nn.Conv2d(3, self.in_C, kernel_size=3, stride=1, padding=1, bias=False)
 
         self.layer1 = self._make_layer(cfg['C'][0], cfg['num_blocks'][0], 1)
@@ -74,10 +75,9 @@ class PreactResNet(nn.Module):
 
 
 
-def PreactResNet32():
+def PreactResNet50():
     cfg = {
-        'in_C': 32,
-        'C': [32, 32, 64, 128],
-        'num_blocks': [2, 3, 3, 2]
+        'C': [32, 64, 128, 256],
+        'num_blocks': [3, 4, 6, 3]
     }
     return PreactResNet(cfg)
