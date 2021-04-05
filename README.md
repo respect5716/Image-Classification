@@ -25,7 +25,7 @@ python main.py
 
 OR
 
-[colab link]
+[colab link](https://github.com/respect5716/Image_Classification/blob/main/run_colab.ipynb)
 
 
 
