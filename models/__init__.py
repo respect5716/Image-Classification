@@ -24,7 +24,7 @@ def create_model(model_name):
         'resnext': ResNeXt50_2x32d,
         'senet': SENet32,
         'mobilenet': MobileNet30,
-        'shufflenet': ShuffleNet32,
+        'shufflenet': ShuffleNet50,
     }
 
     _model = model_dict[model_name]()
